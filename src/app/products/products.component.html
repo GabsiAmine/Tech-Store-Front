@@ -1,0 +1,70 @@
+<div *ngIf="products">
+    <div>
+        <h3>{{title}}</h3>
+    </div>
+    <div *ngFor="let p of products._embedded.products">
+        <div class="col-md-6">
+            <div class="panel panel-default heighted">
+                <div class="panel-heading">{{p.name}}</div>
+                <div class="panel-body">
+                    <div class="col-md-7">
+                        <img class="img-thumbnail img-rounded btn" (click)="onProductsDetails(p)"
+                            src="{{this.catService.host+'/photoproducts/'+p.id+'?ts='+getTS()}}" />
+                        <div *ngIf="authService.isadmin()">
+                            <button (click)=oneditphoto(p)>
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </button>
+
+                            <div *ngIf="editPhoto==true && currentproduct==p">
+                                <input type="file" (change)="onselectedfile($event)">
+                                <button class="btn btn-success" (click)="uploadPhoto()">upload</button>
+                                <a *ngIf="startupload">{{progress}}</a>
+
+                                <div class="field" *ngIf="startupload && currentproduct==p">
+                                    <div class="control">
+                                        <progress class="progress is-primary" [attr.value]="progress"
+                                            max="100"></progress>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div class="panel-body">
+                                <label>Price : {{p.currentprice|number:'0.00'}} </label>
+                                <label>Created : {{p.createdDate|date: 'dd/MM/yyyy'}}</label>
+                                <label>Modif : {{p.lastModifiedDate|date: 'dd/MM/yyyy'}}</label>
+
+
+                            </div>
+                            <span *ngIf="p.promotion">
+                                <img src="assets/images/promo.png" class="img-thumbnail img-circle" height="30">
+                            </span>
+                            <span *ngIf="p.selected">
+                                <img src="assets/images/favorite.png" class="img-thumbnail img-circle" height="30">
+                            </span>
+                            <span *ngIf="p.available">
+                                <img src="assets/images/available.png" class="img-thumbnail img-circle" height="30">
+                            </span>
+                        </div>
+                        <div>
+                            <form #f="ngForm" (ngSubmit)="onAddProductToCaddy(p)">
+                                <div>
+                                    <label class="control-label">Quantité :</label>
+                                    <input type="number" name="quantity" [(ngModel)]="p.quantity" ngModel
+                                        style="width: 40px">
+                                    <button>
+                                        <img src="assets/images/caddy.png">
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

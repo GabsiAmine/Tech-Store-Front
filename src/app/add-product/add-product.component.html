@@ -1,0 +1,46 @@
+<div class="container">
+    <form #f="ngForm" (ngSubmit)="onAddProduct(f.value)">
+        <div class="login-container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Nom Produit</label>
+                        <input type="text" name="name" ngModel class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Desciption</label>
+                        <input type="text" name="desciption" ngModel class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Prix</label>
+                        <input type="text" name="currentprice" ngModel class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group form-check">
+                        <input type="checkbox" name="promotion" [(ngModel)]="isChecked"
+                            (change)="onCheckboxChange($event)" />
+                        Promotion
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button class="btn btn-success pull-left" type="submit">Ajouter Produit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

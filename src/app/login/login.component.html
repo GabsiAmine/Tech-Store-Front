@@ -1,0 +1,37 @@
+<div ng-app="myApp" ng-controller="myController" class="container">
+    <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
+        <div class="login-container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" ngModel required class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" ngModel required class="form-control">
+                        <div ng-show="myForm.pass.$error.required &amp;&amp; myForm.pass.$touched" class="error">
+                            Required!</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button class="btn btn-success pull-left" type="submit">Login</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div ng-show="showError" class="alert alert-danger">Wrong credentials!</div>
+                    <div ng-show="showSuccess" class="alert alert-success">Login Successful!</div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
